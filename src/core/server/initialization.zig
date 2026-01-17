@@ -134,7 +134,7 @@ fn loadConsensusConfig() void {
 
 
 pub const NodeComponents = struct {
-    blockchain: *zen.ZeiCoin,
+    blockchain: *zen.ZeiCash,
     network_manager: *network.NetworkManager,
     sync_manager: *sync.SyncManager,
     server_handlers: *ServerHandlers,
@@ -169,13 +169,13 @@ pub const NodeComponents = struct {
 };
 
 pub fn initializeNode(allocator: std.mem.Allocator, config: command_line.Config) !NodeComponents {
-    std.log.info("Initializing ZeiCoin node", .{});
+    std.log.info("Initializing ZeiCash node", .{});
     
     // Load consensus configuration from environment
     loadConsensusConfig();
     
     // Initialize blockchain
-    const blockchain = try zen.ZeiCoin.init(allocator);
+    const blockchain = try zen.ZeiCash.init(allocator);
     errdefer {
         blockchain.deinit();
         allocator.destroy(blockchain);
@@ -201,7 +201,7 @@ pub fn initializeNode(allocator: std.mem.Allocator, config: command_line.Config)
     blockchain.network_coordinator.network = network_manager;
     std.log.info("✅ Network manager set on blockchain coordinator", .{});
     
-    // Initialize sync manager following ZeiCoin ownership principles
+    // Initialize sync manager following ZeiCash ownership principles
     const sync_manager = try allocator.create(sync.SyncManager);
     sync_manager.* = try sync.SyncManager.init(allocator, blockchain);
     blockchain.sync_manager = sync_manager;
@@ -281,7 +281,7 @@ const HandlerResult = struct {
     handler: network.MessageHandler,
 };
 
-fn createMessageHandler(allocator: std.mem.Allocator, blockchain: *zen.ZeiCoin) !HandlerResult {
+fn createMessageHandler(allocator: std.mem.Allocator, blockchain: *zen.ZeiCash) !HandlerResult {
     // Create message handler implementation
     const handler_impl = try allocator.create(ServerHandlers);
     handler_impl.* = ServerHandlers.init(blockchain);
@@ -292,7 +292,7 @@ fn createMessageHandler(allocator: std.mem.Allocator, blockchain: *zen.ZeiCoin) 
     };
 }
 
-fn initializeMiningSystem(blockchain: *zen.ZeiCoin, miner_wallet_name: []const u8) !void {
+fn initializeMiningSystem(blockchain: *zen.ZeiCash, miner_wallet_name: []const u8) !void {
     const allocator = blockchain.allocator;
     
     // Load specified mining wallet

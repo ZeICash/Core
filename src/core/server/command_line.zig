@@ -1,4 +1,4 @@
-// command_line.zig - Command line argument parsing for ZeiCoin server
+// command_line.zig - Command line argument parsing for ZeiCash server
 // Handles all CLI options and configuration
 
 const std = @import("std");
@@ -119,7 +119,7 @@ fn parseBootstrapNodes(list: *std.ArrayList(BootstrapNode), input: []const u8) !
 fn printHelp() void {
     const print = std.debug.print;
     print(
-        \\ZeiCoin Server
+        \\ZeiCash Server
         \\
         \\Usage: zen_server [options]
         \\

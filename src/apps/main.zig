@@ -1,4 +1,4 @@
-// main.zig - ZeiCoin Node Entry Point
+// main.zig - ZeiCash Node Entry Point
 // This is the main entry point for the zeicoin node executable
 
 const std = @import("std");

@@ -324,7 +324,7 @@ test "entropy to mnemonic - all zeros" {
     const entropy = [_]u8{0x00} ** 16;
     const mnemonic = try entropyToMnemonic(allocator, &entropy);
     
-    // ZeiCoin uses BLAKE3, so checksum differs from standard BIP39
+    // ZeiCash uses BLAKE3, so checksum differs from standard BIP39
     try testing.expectEqualStrings("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon achieve", mnemonic);
 }
 
@@ -337,7 +337,7 @@ test "entropy to mnemonic - all ones" {
     const entropy = [_]u8{0xFF} ** 16;
     const mnemonic = try entropyToMnemonic(allocator, &entropy);
     
-    // ZeiCoin uses BLAKE3, so checksum differs from standard BIP39
+    // ZeiCash uses BLAKE3, so checksum differs from standard BIP39
     try testing.expectEqualStrings("zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zoo zebra", mnemonic);
 }
 

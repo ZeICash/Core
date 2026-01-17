@@ -1,4 +1,4 @@
-// wallet.zig - ZeiCoin HD-Only Wallet with Modern Security
+// wallet.zig - ZeiCash HD-Only Wallet with Modern Security
 // Hierarchical Deterministic wallet implementation with ChaCha20-Poly1305 AEAD
 
 const std = @import("std");
@@ -8,7 +8,7 @@ const bip39 = @import("../crypto/bip39.zig");
 const hd = @import("../crypto/hd.zig");
 const ChaCha20Poly1305 = std.crypto.aead.chacha_poly.ChaCha20Poly1305;
 
-/// 💰 ZeiCoin wallet errors
+/// 💰 ZeiCash wallet errors
 pub const WalletError = error{
     NoWalletLoaded,
     WalletFileNotFound,
@@ -178,7 +178,7 @@ pub const WalletFile = struct {
     }
 };
 
-/// ZeiCoin HD Wallet Manager
+/// ZeiCash HD Wallet Manager
 pub const Wallet = struct {
     allocator: std.mem.Allocator,
     mnemonic: ?[]u8, // Only in memory when unlocked
@@ -357,7 +357,7 @@ pub const Wallet = struct {
         return try derived_key.toKeyPair();
     }
 
-    /// Get ZeiCoin KeyPair for compatibility (current index)
+    /// Get ZeiCash KeyPair for compatibility (current index)
     pub fn getZeiCoinKeyPair(self: *Wallet) ?key.KeyPair {
         return self.getKeyPair(self.current_index) catch null;
     }

@@ -6,7 +6,7 @@ const log = std.log.scoped(.network);
 
 const types = @import("../../types/types.zig");
 const net = @import("../peer.zig");
-const ZeiCoin = @import("../../node.zig").ZeiCoin;
+const ZeiCash = @import("../../node.zig").ZeiCash;
 
 const Block = types.Block;
 const Transaction = types.Transaction;
@@ -32,12 +32,12 @@ pub const BlockProcessingContext = struct {
 /// Block processor handles all block-related network operations
 pub const BlockProcessor = struct {
     allocator: std.mem.Allocator,
-    blockchain: *ZeiCoin,
+    blockchain: *ZeiCash,
 
     const Self = @This();
 
     /// Initialize block processor
-    pub fn init(allocator: std.mem.Allocator, blockchain: *ZeiCoin) Self {
+    pub fn init(allocator: std.mem.Allocator, blockchain: *ZeiCash) Self {
         return .{
             .allocator = allocator,
             .blockchain = blockchain,
@@ -382,7 +382,7 @@ test "BlockProcessor initialization" {
     const allocator = gpa.allocator();
 
     // Mock blockchain (we can't easily create a real one in tests)
-    var mock_blockchain: ZeiCoin = undefined;
+    var mock_blockchain: ZeiCash = undefined;
 
     const processor = BlockProcessor.init(allocator, &mock_blockchain);
     try testing.expectEqual(allocator, processor.allocator);

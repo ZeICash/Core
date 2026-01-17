@@ -28,7 +28,7 @@ pub const StatusReporter = struct {
     
     /// Print blockchain status
     pub fn printStatus(self: *StatusReporter) void {
-        log.info("📊 ZeiCoin Blockchain Status:", .{});
+        log.info("📊 ZeiCash Blockchain Status:", .{});
         const height = self.database.getHeight() catch 0;
         const account_count = self.database.getAccountCount() catch 0;
         log.info("   Height: {} blocks", .{height});

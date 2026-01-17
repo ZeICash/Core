@@ -1,4 +1,4 @@
-// server.zig - ZeiCoin node server (modular version)
+// server.zig - ZeiCash node server (modular version)
 // Thin coordinator that delegates to specialized modules
 
 const std = @import("std");
@@ -51,7 +51,7 @@ pub fn main() !void {
     var components = initialization.initializeNode(allocator, config) catch |err| switch (err) {
         error.OpenFailed => {
             std.debug.print("❌ Database is locked or in use by another process\n", .{});
-            std.debug.print("💡 Stop any running ZeiCoin servers and try again\n", .{});
+            std.debug.print("💡 Stop any running ZeiCash servers and try again\n", .{});
             std.debug.print("💡 Or remove the lock file: rm zeicoin_data_*/rocksdb/LOCK\n", .{});
             return;
         },
@@ -96,7 +96,7 @@ pub fn main() !void {
         .flags = 0,
     }, null);
 
-    std.log.info("✅ ZeiCoin node started successfully", .{});
+    std.log.info("✅ ZeiCash node started successfully", .{});
     std.log.info("Press Ctrl+C to shutdown", .{});
     
     // Main loop - wait for shutdown signal
@@ -231,7 +231,7 @@ fn triggerSyncRecovery(sync_manager: *sync.SyncManager) void {
 fn printBanner() void {
     print("\n", .{});
     print("╔═══════════════════════════════════════════════════════════════════╗\n", .{});
-    print("║                  ⚡ ZeiCoin Node Server ⚡                        ║\n", .{});
+    print("║                  ⚡ ZeiCash Node Server ⚡                        ║\n", .{});
     print("║                    Modular Architecture                           ║\n", .{});
     print("╚═══════════════════════════════════════════════════════════════════╝\n", .{});
     print("\n", .{});

@@ -1,4 +1,4 @@
-// randomx.zig - RandomX integration for ZeiCoin proof-of-work
+// randomx.zig - RandomX integration for ZeiCash proof-of-work
 const std = @import("std");
 const Allocator = std.mem.Allocator;
 
@@ -178,9 +178,9 @@ pub fn createRandomXKey(chain_id: []const u8) [32]u8 {
     var key: [32]u8 = undefined;
     const key_string = std.fmt.allocPrint(
         std.heap.page_allocator,
-        "ZeiCoin-{s}-RandomX",
+        "ZeiCash-{s}-RandomX",
         .{chain_id},
-    ) catch "ZeiCoin-MainNet-RandomX";
+    ) catch "ZeiCash-MainNet-RandomX";
     defer std.heap.page_allocator.free(key_string);
 
     // Hash the key string to get fixed-size key

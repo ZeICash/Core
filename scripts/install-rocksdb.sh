@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 RocksDB Installation Script for ZeiCoin"
+echo "🚀 RocksDB Installation Script for ZeiCash"
 echo "=========================================="
 echo
 
@@ -37,7 +37,7 @@ fi
 echo
 echo "✅ Installation complete!"
 echo
-echo "To use RocksDB backend with ZeiCoin:"
+echo "To use RocksDB backend with ZeiCash:"
 echo "  export ZEICOIN_STORAGE_BACKEND=rocksdb"
 echo "  zig build"
 echo

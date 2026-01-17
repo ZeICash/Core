@@ -1,4 +1,4 @@
-// hd.zig - Hierarchical Deterministic key derivation for ZeiCoin
+// hd.zig - Hierarchical Deterministic key derivation for ZeiCash
 // Ed25519-based HD wallet using BLAKE3 instead of HMAC-SHA512
 
 const std = @import("std");
@@ -37,7 +37,7 @@ pub const HDError = error{
 /// BIP32-style path levels
 pub const PathLevel = enum {
     purpose,     // 44' for BIP44
-    coin_type,   // 882' for ZeiCoin
+    coin_type,   // 882' for ZeiCash
     account,     // Account number
     change,      // 0 = external, 1 = internal
     address,     // Address index
@@ -90,7 +90,7 @@ pub const HDKey = struct {
     /// Note: For Ed25519, we support all indices but treat them as hardened
     pub fn deriveChild(self: *const HDKey, index: u32) !HDKey {
         // For Ed25519, we'll treat all derivation as hardened-style
-        // This is a design choice for ZeiCoin HD wallets
+        // This is a design choice for ZeiCash HD wallets
 
         // Check depth limit
         if (self.depth >= 255) {
@@ -153,7 +153,7 @@ pub const HDKey = struct {
         return kp.public_key.bytes;
     }
     
-    /// Convert to ZeiCoin KeyPair for signing
+    /// Convert to ZeiCash KeyPair for signing
     pub fn toKeyPair(self: *const HDKey) !key.KeyPair {
         // Use the same seed-based generation
         var seed: [32]u8 = undefined;
@@ -169,7 +169,7 @@ pub const HDKey = struct {
         };
     }
     
-    /// Get ZeiCoin address for this key
+    /// Get ZeiCash address for this key
     pub fn getAddress(self: *const HDKey) types.Address {
         const pubkey = self.getPublicKey();
         return types.Address.fromPublicKey(pubkey);
@@ -226,7 +226,7 @@ pub fn derivePath(master: *const HDKey, path: []const u32) !HDKey {
 }
 
 /// Common derivation paths
-pub const COIN_TYPE_ZEICOIN: u32 = 882; // ZeiCoin coin type (single type for both testnet and mainnet)
+pub const COIN_TYPE_ZEICOIN: u32 = 882; // ZeiCash coin type (single type for both testnet and mainnet)
 
 pub fn getAccountPath(account: u32) [3]u32 {
     return [3]u32{

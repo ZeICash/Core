@@ -1,10 +1,10 @@
 #!/bin/bash
-# install_dependencies.sh - Install all ZeiCoin server dependencies
+# install_dependencies.sh - Install all ZeiCash server dependencies
 # Supports Ubuntu/Debian, CentOS/RHEL, and other Linux distributions
 
 set -e
 
-echo "🔧 ZeiCoin Dependency Installation Script"
+echo "🔧 ZeiCash Dependency Installation Script"
 echo "========================================="
 
 # Detect OS
@@ -184,15 +184,15 @@ case $OS in
         ;;
 esac
 
-# Configure firewall for ZeiCoin ports (optional)
-echo "🔥 Configuring firewall for ZeiCoin ports..."
+# Configure firewall for ZeiCash ports (optional)
+echo "🔥 Configuring firewall for ZeiCash ports..."
 if command -v ufw &> /dev/null; then
-    echo "📡 Opening ZeiCoin ports (10800-10802) in UFW..."
-    sudo ufw allow 10800:10802/tcp comment "ZeiCoin blockchain"
-    sudo ufw allow 10800/udp comment "ZeiCoin discovery"
+    echo "📡 Opening ZeiCash ports (10800-10802) in UFW..."
+    sudo ufw allow 10800:10802/tcp comment "ZeiCash blockchain"
+    sudo ufw allow 10800/udp comment "ZeiCash discovery"
     echo "✅ UFW rules added (use 'sudo ufw enable' to activate)"
 elif command -v firewall-cmd &> /dev/null; then
-    echo "📡 Opening ZeiCoin ports (10800-10802) in firewalld..."
+    echo "📡 Opening ZeiCash ports (10800-10802) in firewalld..."
     sudo firewall-cmd --permanent --add-port=10800-10802/tcp
     sudo firewall-cmd --permanent --add-port=10800/udp
     sudo firewall-cmd --reload

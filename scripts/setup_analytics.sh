@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ZeiCoin Analytics Setup Script
+# ZeiCash Analytics Setup Script
 # Sets up PostgreSQL with TimescaleDB for blockchain analytics
 
 set -e
@@ -11,7 +11,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}🚀 ZeiCoin Analytics Setup${NC}"
+echo -e "${GREEN}🚀 ZeiCash Analytics Setup${NC}"
 echo "================================"
 
 # Configuration

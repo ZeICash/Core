@@ -1,4 +1,4 @@
-// Wallet commands for ZeiCoin CLI
+// Wallet commands for ZeiCash CLI
 // Handles wallet creation, restoration, listing, and address management
 
 const std = @import("std");

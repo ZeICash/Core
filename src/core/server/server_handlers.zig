@@ -29,11 +29,11 @@ fn compareHashes(hash1: *const [32]u8, hash2: *const [32]u8) i32 {
 
 /// Server-side network handlers that implement blockchain callbacks
 pub const ServerHandlers = struct {
-    blockchain: *zen.ZeiCoin,
+    blockchain: *zen.ZeiCash,
     
     const Self = @This();
     
-    pub fn init(blockchain: *zen.ZeiCoin) Self {
+    pub fn init(blockchain: *zen.ZeiCash) Self {
         return .{ .blockchain = blockchain };
     }
     

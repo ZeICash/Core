@@ -1,4 +1,4 @@
-// key.zig - ZeiCoin Cryptographic Key Management
+// key.zig - ZeiCash Cryptographic Key Management
 // Ed25519 signatures with secure memory clearing
 
 const std = @import("std");
@@ -20,7 +20,7 @@ pub const KeyError = error{
     KeyGenerationFailed,
 };
 
-/// ZeiCoin cryptographic key pair
+/// ZeiCash cryptographic key pair
 /// Uses Ed25519 for modern, secure signatures
 pub const KeyPair = struct {
     private_key: [64]u8, // Store expanded secret key for compatibility
@@ -67,7 +67,7 @@ pub const KeyPair = struct {
         };
     }
 
-    /// Get ZeiCoin address from this keypair
+    /// Get ZeiCash address from this keypair
     /// Address = SHA256(public_key)
     pub fn getAddress(self: *const KeyPair) Address {
         return Address.fromPublicKey(self.public_key);
@@ -195,7 +195,7 @@ test "signing and verification" {
     var keypair = try KeyPair.generateNew();
     defer keypair.deinit();
 
-    const message = "Hello ZeiCoin!";
+    const message = "Hello ZeiCash!";
 
     // Sign message
     const signature = try keypair.sign(message);

@@ -37,7 +37,7 @@ pub const NetworkCoordinator = struct {
         try network.start(port);
         self.network = network;
 
-        log.info("ZeiCoin network started on port {}", .{port});
+        log.info("ZeiCash network started on port {}", .{port});
     }
 
     /// Stop networking
@@ -50,7 +50,7 @@ pub const NetworkCoordinator = struct {
             // The network threads will naturally die when the process exits
             network.deinit();
             self.allocator.destroy(network);
-            log.info("ZeiCoin network stopped", .{});
+            log.info("ZeiCash network stopped", .{});
         }
     }
 

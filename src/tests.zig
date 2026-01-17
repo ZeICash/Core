@@ -1,4 +1,4 @@
-// tests.zig - ZeiCoin Integration Tests
+// tests.zig - ZeiCash Integration Tests
 // This file contains integration tests moved from main.zig
 
 const std = @import("std");
@@ -10,16 +10,16 @@ const zei = @import("zeicoin");
 const types = zei.types;
 const key = zei.key;
 const util = zei.util;
-const ZeiCoin = zei.blockchain.ZeiCoin;
+const ZeiCash = zei.blockchain.ZeiCash;
 const Transaction = types.Transaction;
 const Address = types.Address;
 const Account = types.Account;
 const Block = types.Block;
 
 // Test helper functions
-fn createTestZeiCoin(data_dir: []const u8) !*ZeiCoin {
-    _ = data_dir; // ZeiCoin.init doesn't take data_dir parameter
-    var zeicoin = try ZeiCoin.init(testing.allocator);
+fn createTestZeiCoin(data_dir: []const u8) !*ZeiCash {
+    _ = data_dir; // ZeiCash.init doesn't take data_dir parameter
+    var zeicoin = try ZeiCash.init(testing.allocator);
     errdefer {
         zeicoin.deinit();
         testing.allocator.destroy(zeicoin);
@@ -339,7 +339,7 @@ test "mempool cleaning after block application" {
 }
 
 test "block broadcasting integration" {
-    var zeicoin = try ZeiCoin.init(testing.allocator);
+    var zeicoin = try ZeiCash.init(testing.allocator);
     defer {
         zeicoin.deinit();
         testing.allocator.destroy(zeicoin);

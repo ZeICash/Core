@@ -11,7 +11,7 @@ const log = std.log.scoped(.chain);
 const Hash = types.Hash;
 
 /// Block Index Cache for O(1) hash-to-height lookups
-/// Follows ZeiCoin memory management principles with explicit ownership
+/// Follows ZeiCash memory management principles with explicit ownership
 pub const BlockIndex = struct {
     // Hash to height mapping for O(1) block height queries
     hash_to_height: std.HashMap([32]u8, u32, HashContext, std.hash_map.default_max_load_percentage),
@@ -44,7 +44,7 @@ pub const BlockIndex = struct {
         };
     }
 
-    /// Clean up all allocated memory following ZeiCoin deinit pattern
+    /// Clean up all allocated memory following ZeiCash deinit pattern
     pub fn deinit(self: *Self) void {
         self.hash_to_height.deinit();
         self.height_to_hash.deinit();

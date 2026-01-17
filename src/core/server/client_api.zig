@@ -1,4 +1,4 @@
-// client_api.zig - Client API server for ZeiCoin
+// client_api.zig - Client API server for ZeiCash
 // Handles transaction submission, balance queries, and other client operations
 
 const std = @import("std");
@@ -17,14 +17,14 @@ const MAX_TRANSACTIONS_PER_SESSION = 100;
 
 pub const ClientApiServer = struct {
     allocator: std.mem.Allocator,
-    blockchain: *zen.ZeiCoin,
+    blockchain: *zen.ZeiCash,
     server: ?net.Server,
     running: bool,
     bind_address: []const u8,
     
     const Self = @This();
     
-    pub fn init(allocator: std.mem.Allocator, blockchain: *zen.ZeiCoin, bind_address: []const u8) Self {
+    pub fn init(allocator: std.mem.Allocator, blockchain: *zen.ZeiCash, bind_address: []const u8) Self {
         return .{
             .allocator = allocator,
             .blockchain = blockchain,

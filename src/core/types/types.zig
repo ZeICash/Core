@@ -8,7 +8,7 @@ const bech32 = @import("../crypto/bech32.zig");
 
 const log = std.log.scoped(.types);
 
-// Money constants - ZeiCoin monetary units
+// Money constants - ZeiCash monetary units
 pub const ZEI_COIN: u64 = 100000000; // 1 Zeicoin = 100,000,000 zei
 pub const ZEI_CENT: u64 = 1000000; // 1 cent = 1,000,000 zei
 
@@ -144,7 +144,7 @@ pub fn freeBootstrapNodes(allocator: std.mem.Allocator, nodes: [][]const u8) voi
     allocator.free(nodes);
 }
 
-// Network ports - ZeiCoin zen networking
+// Network ports - ZeiCash zen networking
 pub const NETWORK_PORTS = struct {
     pub const P2P: u16 = 10801; // Peer-to-peer network
     pub const CLIENT_API: u16 = 10802; // Client API
@@ -280,7 +280,7 @@ pub const TransactionFlags = packed struct(u16) {
     reserved: u12 = 0,
 };
 
-/// ZeiCoin Transaction- Future Proof Design
+/// ZeiCash Transaction- Future Proof Design
 pub const Transaction = struct {
     // Core fields (existing)
     version: u16, // Transaction version for protocol upgrades
@@ -520,7 +520,7 @@ pub const Transaction = struct {
     }
 };
 
-/// Account state in ZeiCoin network
+/// Account state in ZeiCash network
 pub const Account = struct {
     address: Address,
     balance: u64, // Current balance in zei (mature, spendable)
@@ -698,10 +698,10 @@ pub const DifficultyTarget = struct {
     }
 
     /// Calculate work contribution of this difficulty target
-    /// ZeiCoin implementation - CRITICAL CONSENSUS CODE
+    /// ZeiCash implementation - CRITICAL CONSENSUS CODE
     /// Work = 2^256 / target for Nakamoto Consensus
     pub fn toWork(self: DifficultyTarget) ChainWork {
-        // Convert ZeiCoin difficulty format to 256-bit target
+        // Convert ZeiCash difficulty format to 256-bit target
         const target = zeiCoinToTarget(self.base_bytes, self.threshold);
 
         // Use industry-standard work calculation (zero tolerance for error)
@@ -1019,11 +1019,11 @@ pub const GenesisConfig = struct {
 // PROOF OF WORK CALCULATIONS
 // =============================================================================
 
-/// Convert ZeiCoin difficulty format to 256-bit target
-/// ZeiCoin uses: base_bytes (leading zeros) + threshold (next 4 bytes)
+/// Convert ZeiCash difficulty format to 256-bit target
+/// ZeiCash uses: base_bytes (leading zeros) + threshold (next 4 bytes)
 /// Output: full 256-bit target value for work calculation
 ///
-/// ZeiCoin format: [base_bytes zeros][threshold 4 bytes][remaining 0xFF bytes]
+/// ZeiCash format: [base_bytes zeros][threshold 4 bytes][remaining 0xFF bytes]
 /// More leading zeros = smaller target = higher difficulty = more work
 fn zeiCoinToTarget(base_bytes: u8, threshold: u32) u256 {
     // Validate inputs to prevent overflow
@@ -1073,7 +1073,7 @@ fn zeiCoinToTarget(base_bytes: u8, threshold: u32) u256 {
     return target;
 }
 
-/// ZeiCoin work calculation with zero tolerance for error
+/// ZeiCash work calculation with zero tolerance for error
 /// Formula: work = ~target / (target + 1) + 1
 /// Industry-standard proof-of-work calculation for Nakamoto consensus
 fn calculateWork(target: u256) u256 {
@@ -1100,7 +1100,7 @@ fn calculateWork(target: u256) u256 {
     return (inverted_target / denominator) + 1;
 }
 
-/// This is critical consensus code for ZeiCoin's highest cumulative work rule
+/// This is critical consensus code for ZeiCash's highest cumulative work rule
 pub const ChainWork = u256;
 
 /// Chain state for tracking competing blockchain forks
@@ -1178,13 +1178,13 @@ pub const Genesis = struct {
         return switch (CURRENT_NETWORK) {
             .testnet => GenesisConfig{
                 .timestamp = 1757408949090, // September 9, 2025 09:09:09.090 UTC in milliseconds
-                .message = "ZeiCoin TestNet Genesis - A minimal digital currency written in ⚡Zig",
+                .message = "ZeiCash TestNet Genesis - A minimal digital currency written in ⚡Zig",
                 .reward = 50 * ZEI_COIN,
                 .nonce = 0x7E57DE7,
             },
             .mainnet => GenesisConfig{
                 .timestamp = 1736150400000, // January 6, 2025 00:00:00 UTC (PLACEHOLDER) in milliseconds
-                .message = "ZeiCoin MainNet Launch - [Quote]",
+                .message = "ZeiCash MainNet Launch - [Quote]",
                 .reward = 50 * ZEI_COIN,
                 .nonce = 0x3A1F1E7,
             },

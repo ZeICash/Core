@@ -1,4 +1,4 @@
-// dotenv.zig - Environment file loader for ZeiCoin
+// dotenv.zig - Environment file loader for ZeiCash
 // Loads .env files and applies variables to the environment using setenv()
 // Supports multiple .env files with proper precedence and memory management
 

@@ -1,6 +1,6 @@
-# ZeiCoin Systemd Service Setup
+# ZeiCash Systemd Service Setup
 
-This directory contains systemd service files for running ZeiCoin as a production service.
+This directory contains systemd service files for running ZeiCash as a production service.
 
 ## Service Files
 
@@ -13,7 +13,7 @@ This directory contains systemd service files for running ZeiCoin as a productio
 
 ## Prerequisites
 
-1. Build ZeiCoin binaries:
+1. Build ZeiCash binaries:
    ```bash
    cd /root/zeicoin
    zig build -Doptimize=ReleaseFast
@@ -162,10 +162,10 @@ Open required ports:
 
 ```bash
 # UFW (Ubuntu/Debian)
-sudo ufw allow 10801/tcp comment "ZeiCoin P2P"
-sudo ufw allow 10802/tcp comment "ZeiCoin Client API"
-sudo ufw allow 10803/tcp comment "ZeiCoin JSON-RPC"
-sudo ufw allow 8080/tcp comment "ZeiCoin Transaction API"
+sudo ufw allow 10801/tcp comment "ZeiCash P2P"
+sudo ufw allow 10802/tcp comment "ZeiCash Client API"
+sudo ufw allow 10803/tcp comment "ZeiCash JSON-RPC"
+sudo ufw allow 8080/tcp comment "ZeiCash Transaction API"
 ```
 
 ## Troubleshooting

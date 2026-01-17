@@ -1,4 +1,4 @@
-// Network commands for ZeiCoin CLI
+// Network commands for ZeiCash CLI
 // Handles status, sync, and block inspection commands
 
 const std = @import("std");
@@ -31,7 +31,7 @@ pub fn handleStatus(allocator: std.mem.Allocator, args: [][:0]u8) !void {
         return;
     }
 
-    print("📊 ZeiCoin Network Status:\n", .{});
+    print("📊 ZeiCash Network Status:\n", .{});
 
     // Show server information (try to get it, fallback to localhost)
     if (connection.getServerIP(allocator)) |server_ip| {
@@ -78,7 +78,7 @@ pub fn handleStatus(allocator: std.mem.Allocator, args: [][:0]u8) !void {
 
 /// Handle watch status with enhanced blockchain animation
 fn handleWatchStatus(allocator: std.mem.Allocator) !void {
-    print("🔍 Monitoring ZeiCoin network status... (Press Ctrl+C to stop)\n", .{});
+    print("🔍 Monitoring ZeiCash network status... (Press Ctrl+C to stop)\n", .{});
 
     // Blockchain animation frames
     const blockchain_frames = [_][]const u8{

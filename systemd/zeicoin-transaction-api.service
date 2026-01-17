@@ -1,5 +1,5 @@
 [Unit]
-Description=ZeiCoin Transaction API Service (Hybrid RPC + PostgreSQL)
+Description=ZeiCash Transaction API Service (Hybrid RPC + PostgreSQL)
 After=zeicoin-server.service postgresql.service
 Wants=postgresql.service
 

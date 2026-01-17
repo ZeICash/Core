@@ -60,7 +60,7 @@ pub const ChainState = struct {
     }
 
     /// Cleanup resources
-    /// Note: Database is owned by ZeiCoin, we only clean up our own resources
+    /// Note: Database is owned by ZeiCash, we only clean up our own resources
     pub fn deinit(self: *Self) void {
         self.processed_transactions.deinit();
         self.block_index.deinit();

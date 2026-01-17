@@ -1,4 +1,4 @@
-// bech32.zig - Bech32 address encoding for ZeiCoin
+// bech32.zig - Bech32 address encoding for ZeiCash
 // Implements BIP 173 with allocator-based memory management
 
 const std = @import("std");
@@ -186,9 +186,9 @@ pub fn decodeBech32Check(allocator: std.mem.Allocator, bech: []const u8) !struct
     return decodeBech32(allocator, bech);
 }
 
-// ===== ZeiCoin-specific address encoding/decoding =====
+// ===== ZeiCash-specific address encoding/decoding =====
 
-/// Encode a ZeiCoin address to bech32 string
+/// Encode a ZeiCash address to bech32 string
 pub fn encodeAddress(allocator: std.mem.Allocator, address: types.Address, network: types.NetworkType) ![]u8 {
     // Select HRP based on network
     const hrp = switch (network) {
@@ -204,7 +204,7 @@ pub fn encodeAddress(allocator: std.mem.Allocator, address: types.Address, netwo
     return encodeBech32(allocator, hrp, &payload);
 }
 
-/// Decode a bech32 address string to a ZeiCoin address
+/// Decode a bech32 address string to a ZeiCash address
 pub fn decodeAddress(allocator: std.mem.Allocator, bech32_str: []const u8) !types.Address {
     // Find separator
     const sep_pos = std.mem.indexOfScalar(u8, bech32_str, '1') orelse return error.InvalidFormat;

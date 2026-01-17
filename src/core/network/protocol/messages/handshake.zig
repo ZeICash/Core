@@ -321,7 +321,7 @@ pub const HandshakeAckMessage = struct {
 test "HandshakeMessage encode/decode" {
     const allocator = std.testing.allocator;
     
-    var msg = try HandshakeMessage.init(allocator, "ZeiCoin/1.0.0");
+    var msg = try HandshakeMessage.init(allocator, "ZeiCash/1.0.0");
     defer msg.deinit(allocator);
     
     msg.listen_port = 10801;
@@ -357,13 +357,13 @@ test "ServiceFlags functionality" {
     const allocator = std.testing.allocator;
     
     // Test different service combinations
-    var full_node = try HandshakeMessage.initWithServices(allocator, "ZeiCoin/1.0.0", protocol.ServiceFlags.FULL_NODE);
+    var full_node = try HandshakeMessage.initWithServices(allocator, "ZeiCash/1.0.0", protocol.ServiceFlags.FULL_NODE);
     defer full_node.deinit(allocator);
     
-    var mining_node = try HandshakeMessage.initWithServices(allocator, "ZeiCoin/1.0.0", protocol.ServiceFlags.MINING_NODE);
+    var mining_node = try HandshakeMessage.initWithServices(allocator, "ZeiCash/1.0.0", protocol.ServiceFlags.MINING_NODE);
     defer mining_node.deinit(allocator);
     
-    var pruned_node = try HandshakeMessage.initWithServices(allocator, "ZeiCoin/1.0.0", protocol.ServiceFlags.PRUNED_NODE);
+    var pruned_node = try HandshakeMessage.initWithServices(allocator, "ZeiCash/1.0.0", protocol.ServiceFlags.PRUNED_NODE);
     defer pruned_node.deinit(allocator);
     
     // Test sync peer suitability

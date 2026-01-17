@@ -2,7 +2,7 @@
 set -e
 
 echo "==================================="
-echo "Initializing ZeiCoin Peer Node"
+echo "Initializing ZeiCash Peer Node"
 echo "==================================="
 
 # Wait for seed node to be fully ready
@@ -57,7 +57,7 @@ fi
 echo "==================================="
 
 # Resolve hostnames to IPs in bootstrap list
-# ZeiCoin only accepts IP addresses, not hostnames
+# ZeiCash only accepts IP addresses, not hostnames
 BOOTSTRAP_IPS=""
 IFS=',' read -ra NODES <<< "$ZEICOIN_BOOTSTRAP"
 for node in "${NODES[@]}"; do

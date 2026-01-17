@@ -2,7 +2,7 @@
 set -e
 
 echo "==================================="
-echo "Initializing ZeiCoin Seed Node"
+echo "Initializing ZeiCash Seed Node"
 echo "==================================="
 
 # Wait a moment for the file system to be ready

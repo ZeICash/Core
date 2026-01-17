@@ -1,4 +1,4 @@
-// genesis.zig - ZeiCoin Genesis Block Definitions
+// genesis.zig - ZeiCash Genesis Block Definitions
 // Hardcoded genesis blocks for network security and consistency
 
 const std = @import("std");
@@ -6,7 +6,7 @@ const types = @import("../types/types.zig");
 const util = @import("../util/util.zig");
 
 /// Network-specific genesis block configurations
-/// These are the canonical genesis blocks that define each ZeiCoin network
+/// These are the canonical genesis blocks that define each ZeiCash network
 pub const GenesisBlocks = struct {
     /// TestNet Genesis Block (for development and testing)
     /// Created: 2025-09-09 09:09:09.090 UTC
@@ -14,7 +14,7 @@ pub const GenesisBlocks = struct {
     pub const TESTNET = struct {
         pub const HASH: [32]u8 = [_]u8{ 0x6d, 0x31, 0xc6, 0x04, 0x14, 0x24, 0x5f, 0xdb, 0x41, 0x87, 0x9c, 0xd2, 0xa3, 0x62, 0x4f, 0xb3, 0x6e, 0xb4, 0x96, 0x3b, 0x9b, 0x07, 0x21, 0xf5, 0x24, 0x69, 0x7d, 0xd3, 0x9b, 0xff, 0x7f, 0x0a };
 
-        pub const MESSAGE = "ZeiCoin TestNet Genesis - A minimal digital currency written in ⚡Zig";
+        pub const MESSAGE = "ZeiCash TestNet Genesis - A minimal digital currency written in ⚡Zig";
         pub const TIMESTAMP: u64 = 1757408949090; // September 9, 2025 09:09:09.090 UTC
         pub const NONCE: u64 = 0x7E57DE7;
         pub const MINER_REWARD: u64 = 0; // No miner reward in genesis
@@ -48,11 +48,11 @@ pub const GenesisBlocks = struct {
 
     /// MainNet Genesis Block (for production use)
     /// Created: TBD (will be set when mainnet launches)
-    /// Purpose: Production ZeiCoin network
+    /// Purpose: Production ZeiCash network
     pub const MAINNET = struct {
         pub const HASH: [32]u8 = [_]u8{ 0x1a, 0x2b, 0x3c, 0x4d, 0x5e, 0x6f, 0x70, 0x81, 0x92, 0xa3, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09, 0x10, 0x21, 0x32, 0x43, 0x54, 0x65, 0x76, 0x87, 0x98, 0xa9, 0xba, 0xcb, 0xdc, 0xed, 0xfe, 0x0f };
 
-        pub const MESSAGE = "ZeiCoin MainNet Launch - [INSERT_LAUNCH_HEADLINE]";
+        pub const MESSAGE = "ZeiCash MainNet Launch - [INSERT_LAUNCH_HEADLINE]";
         pub const TIMESTAMP: u64 = 0; // TBD - will be set to exact launch time
         pub const NONCE: u64 = 0x3A1F1E7;
         pub const MINER_REWARD: u64 = 0; // No miner reward in genesis

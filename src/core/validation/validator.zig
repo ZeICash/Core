@@ -2,7 +2,7 @@ const std = @import("std");
 const types = @import("../types/types.zig");
 
 // Forward declaration for blockchain dependency
-const ZeiCoin = @import("../node.zig").ZeiCoin;
+const ZeiCash = @import("../node.zig").ZeiCash;
 // Import the real chain validator
 const RealChainValidator = @import("../chain/validator.zig").ChainValidator;
 
@@ -16,12 +16,12 @@ const Hash = types.Hash;
 /// Provides different validation modes for different contexts (sync, reorg, normal)
 pub const ChainValidator = struct {
     allocator: std.mem.Allocator,
-    blockchain: *ZeiCoin,
+    blockchain: *ZeiCash,
     real_validator: RealChainValidator,
     
     const Self = @This();
     
-    pub fn init(allocator: std.mem.Allocator, blockchain: *ZeiCoin) Self {
+    pub fn init(allocator: std.mem.Allocator, blockchain: *ZeiCash) Self {
         return .{
             .allocator = allocator,
             .blockchain = blockchain,

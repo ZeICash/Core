@@ -1,5 +1,5 @@
 [Unit]
-Description=Run ZeiCoin Indexer every 30 seconds
+Description=Run ZeiCash Indexer every 30 seconds
 Requires=zeicoin-indexer.service
 
 [Timer]

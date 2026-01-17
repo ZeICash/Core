@@ -66,7 +66,7 @@ pub fn hash256(data: []const u8) [32]u8 {
     return hasher2.finalResult();
 }
 
-/// BLAKE3 hash (modern - preferred for ZeiCoin)
+/// BLAKE3 hash (modern - preferred for ZeiCash)
 /// BLAKE3 is faster, more secure, and simpler than SHA256
 pub fn blake3Hash(data: []const u8) [32]u8 {
     var output: [32]u8 = undefined;

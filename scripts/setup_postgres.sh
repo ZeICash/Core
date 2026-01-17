@@ -1,11 +1,11 @@
 #!/bin/bash
-# Setup PostgreSQL for ZeiCoin indexer
+# Setup PostgreSQL for ZeiCash indexer
 
 # Default to testnet if not specified
 NETWORK="${1:-testnet}"
 DB_NAME="zeicoin_${NETWORK}"
 
-echo "Setting up PostgreSQL for ZeiCoin indexer..."
+echo "Setting up PostgreSQL for ZeiCash indexer..."
 echo "Network: $NETWORK"
 echo "Database: $DB_NAME"
 

@@ -1,5 +1,5 @@
 [Unit]
-Description=ZeiCoin Blockchain Indexer
+Description=ZeiCash Blockchain Indexer
 After=postgresql.service zeicoin-server.service
 Requires=postgresql.service
 

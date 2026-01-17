@@ -1,5 +1,5 @@
 // batch_sync.zig - ZSP-001 Compliant Batch Synchronization Protocol
-// Primary synchronization implementation for ZeiCoin blockchain
+// Primary synchronization implementation for ZeiCash blockchain
 //
 // This implements the ZSP-001 specification for high-performance batch block
 // synchronization with up to 50x performance improvement over single-block sync.

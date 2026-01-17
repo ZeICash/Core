@@ -1,4 +1,4 @@
-// Client protocol helpers for ZeiCoin CLI
+// Client protocol helpers for ZeiCash CLI
 // Common request/response patterns and data structures
 
 const std = @import("std");

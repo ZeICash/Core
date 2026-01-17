@@ -1,4 +1,4 @@
-// password.zig - Secure password handling for ZeiCoin wallets
+// password.zig - Secure password handling for ZeiCash wallets
 // Provides three modes: test (default passwords), environment (from env var), and interactive (secure prompt)
 // Handles password input with terminal echo disabled and memory clearing after use
 

@@ -29,7 +29,7 @@ const ChainProcessor = @import("chain/processor.zig").ChainProcessor;
 const DifficultyCalculator = @import("chain/difficulty.zig").DifficultyCalculator;
 const StatusReporter = @import("monitoring/status.zig").StatusReporter;
 
-pub const ZeiCoin = struct {
+pub const ZeiCash = struct {
     database: *db.Database,
     chain_state: @import("chain/state.zig").ChainState,
     network_coordinator: NetworkCoordinator,
@@ -47,7 +47,7 @@ pub const ZeiCoin = struct {
     mining_manager: ?*miner_mod.MiningManager,
     mining_keypair: ?@import("crypto/key.zig").KeyPair,
 
-    pub fn init(allocator: std.mem.Allocator) !*ZeiCoin {
+    pub fn init(allocator: std.mem.Allocator) !*ZeiCash {
         const data_dir = switch (types.CURRENT_NETWORK) {
             .testnet => "zeicoin_data_testnet",
             .mainnet => "zeicoin_data_mainnet",
@@ -59,7 +59,7 @@ pub const ZeiCoin = struct {
         database.* = try db.Database.init(allocator, data_dir);
         errdefer database.deinit();
 
-        const instance_ptr = try allocator.create(ZeiCoin);
+        const instance_ptr = try allocator.create(ZeiCash);
         errdefer allocator.destroy(instance_ptr);
 
         // var header_chain = headerchain.HeaderChain.init(allocator); // ZSP-001: Disabled headers-first sync
@@ -67,7 +67,7 @@ pub const ZeiCoin = struct {
 
         const chain_state = @import("chain/state.zig").ChainState.init(allocator, database);
 
-        instance_ptr.* = ZeiCoin{
+        instance_ptr.* = ZeiCash{
             .database = database,
             .chain_state = chain_state,
             .network_coordinator = undefined,
@@ -162,12 +162,12 @@ pub const ZeiCoin = struct {
         }
 
 
-        log.info("✅ ZeiCoin initialization completed successfully", .{});
+        log.info("✅ ZeiCash initialization completed successfully", .{});
 
         return instance_ptr;
     }
 
-    pub fn initializeBlockchain(self: *ZeiCoin) !void {
+    pub fn initializeBlockchain(self: *ZeiCash) !void {
         const current_height = self.getHeight() catch {
             log.info("❌ ERROR: Cannot retrieve blockchain height!", .{});
             return error.BlockchainNotInitialized;
@@ -178,8 +178,8 @@ pub const ZeiCoin = struct {
         log.info("", .{});
     }
 
-    pub fn deinit(self: *ZeiCoin) void {
-        log.info("🧹 Starting ZeiCoin cleanup...", .{});
+    pub fn deinit(self: *ZeiCash) void {
+        log.info("🧹 Starting ZeiCash cleanup...", .{});
 
 
         if (self.mining_manager) |manager| {
@@ -209,10 +209,10 @@ pub const ZeiCoin = struct {
         defer self.allocator.destroy(self.database);
         defer self.database.deinit();
 
-        log.info("✅ ZeiCoin cleanup completed", .{});
+        log.info("✅ ZeiCash cleanup completed", .{});
     }
 
-    pub fn createCanonicalGenesis(self: *ZeiCoin) !void {
+    pub fn createCanonicalGenesis(self: *ZeiCash) !void {
         var genesis_block = try genesis.createGenesis(self.allocator);
         defer genesis_block.deinit(self.allocator);
         for (genesis_block.transactions) |tx| {
@@ -239,33 +239,33 @@ pub const ZeiCoin = struct {
         log.info("✅ Blockchain ready for operation!", .{});
     }
 
-    fn createGenesis(self: *ZeiCoin) !void {
+    fn createGenesis(self: *ZeiCash) !void {
         try self.createCanonicalGenesis();
     }
 
-    pub fn getAccount(self: *ZeiCoin, address: Address) !Account {
+    pub fn getAccount(self: *ZeiCash, address: Address) !Account {
 
         return try self.chain_query.getAccount(address);
     }
 
-    pub fn addTransaction(self: *ZeiCoin, transaction: Transaction) !void {
+    pub fn addTransaction(self: *ZeiCash, transaction: Transaction) !void {
         try self.mempool_manager.addTransaction(transaction);
     }
 
-    pub fn getHeight(self: *ZeiCoin) !u32 {
+    pub fn getHeight(self: *ZeiCash) !u32 {
         return try self.chain_query.getHeight();
     }
 
-    pub fn getBlockByHeight(self: *ZeiCoin, height: u32) !Block {
+    pub fn getBlockByHeight(self: *ZeiCash, height: u32) !Block {
         return try self.chain_query.getBlock(height);
     }
     
-    pub fn getBlockHashAtHeight(self: *ZeiCoin, height: u32) ![32]u8 {
+    pub fn getBlockHashAtHeight(self: *ZeiCash, height: u32) ![32]u8 {
         const block = try self.chain_query.getBlock(height);
         return block.hash();
     }
     
-    pub fn getBestBlockHash(self: *ZeiCoin) ![32]u8 {
+    pub fn getBestBlockHash(self: *ZeiCash) ![32]u8 {
         const current_height = try self.getHeight();
         if (current_height == 0) {
             // Return genesis block hash if at height 0
@@ -275,7 +275,7 @@ pub const ZeiCoin = struct {
     }
 
     /// Get transaction by hash - checks mempool first, then database
-    pub fn getTransaction(self: *ZeiCoin, tx_hash: Hash) !struct {
+    pub fn getTransaction(self: *ZeiCash, tx_hash: Hash) !struct {
         transaction: Transaction,
         status: enum { pending, confirmed },
         block_height: ?u32,
@@ -300,7 +300,7 @@ pub const ZeiCoin = struct {
         };
     }
 
-    pub fn getCurrentDifficulty(self: *ZeiCoin) !u64 {
+    pub fn getCurrentDifficulty(self: *ZeiCash) !u64 {
         // Calculate what the current difficulty should be for the next block
         var difficulty_calc = DifficultyCalculator.init(self.allocator, self.database);
         defer difficulty_calc.deinit();
@@ -308,16 +308,16 @@ pub const ZeiCoin = struct {
         const difficulty_target = try difficulty_calc.calculateNextDifficulty();
         return difficulty_target.toU64();
     }
-    fn getMedianTimePast(self: *ZeiCoin, height: u32) !u64 {
+    fn getMedianTimePast(self: *ZeiCash, height: u32) !u64 {
         return try self.chain_query.getMedianTimePast(height);
     }
 
-    fn isValidForkBlock(self: *ZeiCoin, block: types.Block) !bool {
+    fn isValidForkBlock(self: *ZeiCash, block: types.Block) !bool {
         // Fork validation now handled by chain validator
         return try self.chain_validator.validateBlock(block, 0); // Height will be determined by validator
     }
 
-    fn storeForkBlock(self: *ZeiCoin, block: types.Block, fork_height: u32) !void {
+    fn storeForkBlock(self: *ZeiCash, block: types.Block, fork_height: u32) !void {
         // Fork storage now handled by adding block to chain
         _ = self;
         _ = fork_height;
@@ -326,43 +326,43 @@ pub const ZeiCoin = struct {
         _ = block; // Block will be processed through regular channels
     }
 
-    pub fn addBlockToChain(self: *ZeiCoin, block: Block, height: u32) !void {
+    pub fn addBlockToChain(self: *ZeiCash, block: Block, height: u32) !void {
         return try self.chain_processor.addBlockToChain(block, height);
     }
 
     /// Add sync block directly to chain processor, bypassing block processor validation
-    pub fn addSyncBlockToChain(self: *ZeiCoin, block: Block, height: u32) !void {
+    pub fn addSyncBlockToChain(self: *ZeiCash, block: Block, height: u32) !void {
         log.info("🔄 [SYNC] Adding block {} directly to chain processor (bypassing block processor)", .{height});
         return try self.chain_processor.addBlockToChain(block, height);
     }
 
-    fn applyBlock(self: *ZeiCoin, block: Block) !void {
+    fn applyBlock(self: *ZeiCash, block: Block) !void {
         return try self.chain_processor.applyBlock(block);
     }
 
-    pub fn startNetwork(self: *ZeiCoin, port: u16) !void {
+    pub fn startNetwork(self: *ZeiCash, port: u16) !void {
         try self.network_coordinator.startNetwork(port);
     }
 
-    pub fn stopNetwork(self: *ZeiCoin) void {
+    pub fn stopNetwork(self: *ZeiCash) void {
         self.network_coordinator.stopNetwork();
     }
 
-    pub fn connectToPeer(self: *ZeiCoin, address: []const u8) !void {
+    pub fn connectToPeer(self: *ZeiCash, address: []const u8) !void {
         try self.network_coordinator.connectToPeer(address);
     }
 
-    pub fn printStatus(self: *ZeiCoin) void {
+    pub fn printStatus(self: *ZeiCash) void {
         self.status_reporter.printStatus();
     }
 
-    pub fn handleIncomingTransaction(self: *ZeiCoin, transaction: types.Transaction) !void {
+    pub fn handleIncomingTransaction(self: *ZeiCash, transaction: types.Transaction) !void {
         try self.mempool_manager.handleIncomingTransaction(transaction);
     }
 
     /// Get total cumulative work for the main chain
     /// This implements proper Nakamoto Consensus by summing proof-of-work
-    pub fn getTotalWork(self: *ZeiCoin) !types.ChainWork {
+    pub fn getTotalWork(self: *ZeiCash) !types.ChainWork {
         const current_height = try self.database.getHeight();
         var cumulative_work: types.ChainWork = 0;
 
@@ -384,7 +384,7 @@ pub const ZeiCoin = struct {
         return cumulative_work;
     }
 
-    fn handleChainReorganization(self: *ZeiCoin, new_block: types.Block, new_chain_state: types.ChainState) !void {
+    fn handleChainReorganization(self: *ZeiCash, new_block: types.Block, new_chain_state: types.ChainState) !void {
         _ = new_chain_state;
         _ = new_block;
         // Reorganization is now handled by sync manager via bulk reorg
@@ -392,17 +392,17 @@ pub const ZeiCoin = struct {
         _ = self;
     }
 
-    fn rollbackToHeight(self: *ZeiCoin, target_height: u32) !void {
+    fn rollbackToHeight(self: *ZeiCash, target_height: u32) !void {
         _ = self;
         log.info("🔄 Rollback to height {} delegated to chain processor", .{target_height});
     }
 
-    fn handleSyncBlock(self: *ZeiCoin, height: u32, block: Block) !void {
+    fn handleSyncBlock(self: *ZeiCash, height: u32, block: Block) !void {
         _ = height;
         try self.handleIncomingBlock(block, null);
     }
 
-    pub fn validateBlock(self: *ZeiCoin, block: Block, expected_height: u32) !bool {
+    pub fn validateBlock(self: *ZeiCash, block: Block, expected_height: u32) !bool {
         log.info("🔧 [NODE] validateBlock() ENTRY - height: {}", .{expected_height});
         log.info("🔧 [NODE] Delegating to chain_validator.validateBlock()", .{});
         const result = try self.chain_validator.validateBlock(block, expected_height);
@@ -410,7 +410,7 @@ pub const ZeiCoin = struct {
         return result;
     }
 
-    pub fn validateSyncBlock(self: *ZeiCoin, block: *const Block, expected_height: u32) !bool {
+    pub fn validateSyncBlock(self: *ZeiCash, block: *const Block, expected_height: u32) !bool {
         log.info("🔧 [NODE] validateSyncBlock() ENTRY - height: {}", .{expected_height});
         log.info("🔧 [NODE] Delegating to chain_validator.validateSyncBlock()", .{});
         const result = try self.chain_validator.validateSyncBlock(block, expected_height);
@@ -418,35 +418,35 @@ pub const ZeiCoin = struct {
         return result;
     }
 
-    pub fn validateTransaction(self: *ZeiCoin, tx: Transaction) !bool {
+    pub fn validateTransaction(self: *ZeiCash, tx: Transaction) !bool {
         return try self.chain_validator.validateTransaction(tx);
     }
 
-    pub fn shouldSync(self: *ZeiCoin, peer_height: u32) !bool {
+    pub fn shouldSync(self: *ZeiCash, peer_height: u32) !bool {
         if (self.sync_manager) |sm| {
             return try sm.shouldSyncWithPeer(peer_height);
         }
         return false;
     }
 
-    pub fn getSyncState(self: *const ZeiCoin) sync_mod.SyncState {
+    pub fn getSyncState(self: *const ZeiCash) sync_mod.SyncState {
         if (self.sync_manager) |sm| {
             return sm.getSyncState();
         }
         return self.sync_state;
     }
 
-    pub fn getBlock(self: *ZeiCoin, height: u32) !types.Block {
+    pub fn getBlock(self: *ZeiCash, height: u32) !types.Block {
         return try self.chain_query.getBlock(height);
     }
 
-    fn switchSyncPeer(self: *ZeiCoin) !void {
+    fn switchSyncPeer(self: *ZeiCash) !void {
         if (self.sync_manager) |sm| {
             try sm.switchToNewPeer();
         }
     }
 
-    fn failSync(self: *ZeiCoin, reason: []const u8) void {
+    fn failSync(self: *ZeiCash, reason: []const u8) void {
         if (self.sync_manager) |sm| {
             sm.failSyncWithReason(reason);
         } else {
@@ -458,26 +458,26 @@ pub const ZeiCoin = struct {
         }
     }
 
-    pub fn checkForNewBlocks(self: *ZeiCoin) !void {
+    pub fn checkForNewBlocks(self: *ZeiCash) !void {
         try self.message_dispatcher.checkForNewBlocks();
     }
 
-    pub fn handleIncomingBlock(self: *ZeiCoin, block: Block, peer: ?*net.Peer) !void {
+    pub fn handleIncomingBlock(self: *ZeiCash, block: Block, peer: ?*net.Peer) !void {
         log.info("🔧 [NODE] handleIncomingBlock() ENTRY - delegating to message handler", .{});
         try self.message_dispatcher.handleIncomingBlock(block, peer);
         log.info("🔧 [NODE] handleIncomingBlock() completed successfully", .{});
     }
 
-    pub fn broadcastNewBlock(self: *ZeiCoin, block: Block) !void {
+    pub fn broadcastNewBlock(self: *ZeiCash, block: Block) !void {
         try self.message_dispatcher.broadcastNewBlock(block);
     }
 
-    pub fn getHeadersRange(self: *ZeiCoin, start_height: u32, count: u32) ![]BlockHeader {
+    pub fn getHeadersRange(self: *ZeiCash, start_height: u32, count: u32) ![]BlockHeader {
         return try self.chain_query.getHeadersRange(start_height, count);
     }
 
     /// Get the next available nonce for an address, considering pending transactions in mempool
-    pub fn getNextAvailableNonce(self: *ZeiCoin, address: types.Address) !u64 {
+    pub fn getNextAvailableNonce(self: *ZeiCash, address: types.Address) !u64 {
         // Get current account nonce
         const account = try self.chain_query.getAccount(address);
         var next_nonce = account.nonce;
@@ -494,25 +494,25 @@ pub const ZeiCoin = struct {
         return next_nonce;
     }
 
-    fn startBlockDownloads(self: *ZeiCoin) !void {
+    fn startBlockDownloads(self: *ZeiCash) !void {
         if (self.sync_manager) |sm| {
             try sm.startBlockDownloads();
         }
     }
 
-    fn requestNextBlocks(self: *ZeiCoin) !void {
+    fn requestNextBlocks(self: *ZeiCash) !void {
         if (self.sync_manager) |sm| {
             try sm.requestNextBlocks();
         }
     }
 
-    pub fn processDownloadedBlock(self: *ZeiCoin, block: Block, height: u32) !void {
+    pub fn processDownloadedBlock(self: *ZeiCash, block: Block, height: u32) !void {
         if (self.sync_manager) |sm| {
             try sm.processDownloadedBlock(block, height);
         }
     }
 
-    pub fn calculateNextDifficulty(self: *ZeiCoin) !types.DifficultyTarget {
+    pub fn calculateNextDifficulty(self: *ZeiCash) !types.DifficultyTarget {
         return try self.difficulty_calculator.calculateNextDifficulty();
     }
 };

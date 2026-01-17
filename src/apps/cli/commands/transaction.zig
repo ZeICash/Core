@@ -1,4 +1,4 @@
-// Transaction commands for ZeiCoin CLI
+// Transaction commands for ZeiCash CLI
 // Handles balance, send, and history commands
 
 const std = @import("std");

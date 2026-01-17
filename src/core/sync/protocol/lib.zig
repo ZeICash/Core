@@ -1,5 +1,5 @@
 // lib.zig - ZSP-001 Sync Protocol Library Exports
-// Central export module for ZeiCoin Synchronization Protocol implementation
+// Central export module for ZeiCash Synchronization Protocol implementation
 //
 // This module provides the public API for ZSP-001 compliant blockchain
 // synchronization with high-performance batch downloading and sequential

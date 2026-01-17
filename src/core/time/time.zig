@@ -1,4 +1,4 @@
-// time.zig - Network Time Synchronization for ZeiCoin
+// time.zig - Network Time Synchronization for ZeiCash
 // Provides accurate time synchronization using NTP servers and peer consensus
 
 const std = @import("std");

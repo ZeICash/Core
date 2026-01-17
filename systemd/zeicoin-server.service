@@ -1,5 +1,5 @@
 [Unit]
-Description=ZeiCoin Blockchain Server
+Description=ZeiCash Blockchain Server
 After=network.target
 Wants=network-online.target
 

@@ -280,7 +280,7 @@ test "MessageEnvelope input validation" {
 test "MessageEnvelope round-trip with const correctness" {
     const allocator = std.testing.allocator;
 
-    const test_payload = "Hello, ZeiCoin Network!";
+    const test_payload = "Hello, ZeiCash Network!";
     var envelope = try MessageEnvelope.init(allocator, .ping, test_payload);
     defer envelope.deinit();
 

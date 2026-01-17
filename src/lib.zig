@@ -1,5 +1,5 @@
-// lib.zig - ZeiCoin Library Public API
-// This file exports all public components of the ZeiCoin blockchain
+// lib.zig - ZeiCash Library Public API
+// This file exports all public components of the ZeiCash blockchain
 
 // Core blockchain components
 pub const blockchain = @import("core/node.zig");
@@ -70,4 +70,4 @@ pub const BlockHeader = types.BlockHeader;
 pub const Account = types.Account;
 pub const Address = types.Address;
 pub const Hash = types.Hash;
-pub const ZeiCoin = blockchain.ZeiCoin;
+pub const ZeiCash = blockchain.ZeiCash;

@@ -3,7 +3,7 @@ const log = std.log.scoped(.message_handler);
 
 const types = @import("../types/types.zig");
 const net = @import("peer.zig");
-const ZeiCoin = @import("../node.zig").ZeiCoin;
+const ZeiCash = @import("../node.zig").ZeiCash;
 
 // Import modular components
 const BlockProcessor = @import("processors/block_processor.zig").BlockProcessor;
@@ -13,7 +13,7 @@ const Block = types.Block;
 
 pub const MessageDispatcher = struct {
     allocator: std.mem.Allocator,
-    blockchain: *ZeiCoin,
+    blockchain: *ZeiCash,
     
     // Modular components
     block_processor: BlockProcessor,
@@ -21,7 +21,7 @@ pub const MessageDispatcher = struct {
     const Self = @This();
     
     /// Initialize message dispatcher with modular components
-    pub fn init(allocator: std.mem.Allocator, blockchain: *ZeiCoin) Self {
+    pub fn init(allocator: std.mem.Allocator, blockchain: *ZeiCash) Self {
         return .{
             .allocator = allocator,
             .blockchain = blockchain,

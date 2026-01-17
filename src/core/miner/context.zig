@@ -15,5 +15,5 @@ pub const MiningContext = struct {
     // fork_manager removed - using modern reorganization system
     
     // Reference to the blockchain for method calls
-    blockchain: *@import("../node.zig").ZeiCoin,
+    blockchain: *@import("../node.zig").ZeiCash,
 };

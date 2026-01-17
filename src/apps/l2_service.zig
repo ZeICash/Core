@@ -1,4 +1,4 @@
-// l2_service.zig - Consolidated L2 Messaging Service and REST API for ZeiCoin
+// l2_service.zig - Consolidated L2 Messaging Service and REST API for ZeiCash
 // Provides transaction enhancements, messaging capabilities, and HTTP API endpoints
 
 const std = @import("std");

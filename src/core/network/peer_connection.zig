@@ -161,7 +161,7 @@ pub const PeerConnection = struct {
 
     /// Send handshake message
     fn sendHandshake(self: *Self) !void {
-        const user_agent = "ZeiCoin/1.0.0";
+        const user_agent = "ZeiCash/1.0.0";
         var handshake = try message_types.HandshakeMessage.init(self.allocator, user_agent);
         defer handshake.deinit(self.allocator);
 

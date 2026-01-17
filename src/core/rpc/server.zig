@@ -11,7 +11,7 @@ const log = std.log.scoped(.rpc_server);
 /// Uses secondary RocksDB instance for concurrent reads during mining
 pub const RPCServer = struct {
     allocator: std.mem.Allocator,
-    blockchain: *zen.ZeiCoin,
+    blockchain: *zen.ZeiCash,
     secondary_db: ?db.Database,
     blockchain_path: []const u8,
     secondary_path: []const u8,
@@ -25,7 +25,7 @@ pub const RPCServer = struct {
 
     pub fn init(
         allocator: std.mem.Allocator,
-        blockchain: *zen.ZeiCoin,
+        blockchain: *zen.ZeiCash,
         blockchain_path: []const u8,
         port: u16,
     ) !*RPCServer {

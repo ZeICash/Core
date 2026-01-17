@@ -1,4 +1,4 @@
-// cli_new.zig - Modular ZeiCoin Command Line Interface
+// cli_new.zig - Modular ZeiCash Command Line Interface
 // Clean main entry point that delegates to specialized modules
 
 const std = @import("std");

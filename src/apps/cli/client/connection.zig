@@ -1,4 +1,4 @@
-// Client connection module for ZeiCoin CLI
+// Client connection module for ZeiCash CLI
 // Handles server discovery, connection establishment, and basic communication
 
 const std = @import("std");
@@ -90,7 +90,7 @@ pub fn getServerIP(allocator: std.mem.Allocator) ![]const u8 {
     if (autoDetectServerIP(allocator)) |detected_ip| {
         defer allocator.free(detected_ip);
 
-        // Test if detected IP actually has a ZeiCoin server
+        // Test if detected IP actually has a ZeiCash server
         if (testServerConnection(detected_ip)) {
             return allocator.dupe(u8, detected_ip);
         }
@@ -216,7 +216,7 @@ fn readWithTimeout(stream: net.Stream, buffer: []u8) !usize {
     return read_result.bytes_read;
 }
 
-/// Connect to ZeiCoin server with automatic server discovery
+/// Connect to ZeiCash server with automatic server discovery
 pub fn connect(allocator: std.mem.Allocator) !ClientConnection {
     const server_ip = try getServerIP(allocator);
     errdefer allocator.free(server_ip);
@@ -229,11 +229,11 @@ pub fn connect(allocator: std.mem.Allocator) !ClientConnection {
     const stream = connectWithTimeout(server_address) catch |err| {
         switch (err) {
             ConnectionError.ConnectionTimeout => {
-                print("❌ Connection timeout to ZeiCoin server at {s}:10802 (5s)\n", .{server_ip});
+                print("❌ Connection timeout to ZeiCash server at {s}:10802 (5s)\n", .{server_ip});
                 return ConnectionError.ConnectionTimeout;
             },
             ConnectionError.ConnectionFailed => {
-                print("❌ Cannot connect to ZeiCoin server at {s}:10802\n", .{server_ip});
+                print("❌ Cannot connect to ZeiCash server at {s}:10802\n", .{server_ip});
                 print("💡 Make sure the server is running\n", .{});
                 return ConnectionError.ConnectionFailed;
             },

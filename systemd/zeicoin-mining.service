@@ -1,5 +1,5 @@
 [Unit]
-Description=ZeiCoin Mining Server
+Description=ZeiCash Mining Server
 After=network.target
 Wants=network.target
 

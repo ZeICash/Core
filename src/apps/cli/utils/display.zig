@@ -1,4 +1,4 @@
-// Display utilities for ZeiCoin CLI
+// Display utilities for ZeiCash CLI
 // Formatting, banners, and user interface helpers
 
 const std = @import("std");
@@ -9,7 +9,7 @@ const zeicoin = @import("zeicoin");
 const util = zeicoin.util;
 const protocol = @import("../client/protocol.zig");
 
-/// Print the ZeiCoin banner
+/// Print the ZeiCash banner
 pub fn printZeiBanner() void {
     print("\n", .{});
     print("╔═════════════════════════════════════════════════════════════════════════╗\n", .{});

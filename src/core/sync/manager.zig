@@ -1,5 +1,5 @@
 // manager.zig - ZSP-001 Sync Manager
-// High-level coordinator for ZeiCoin Synchronization Protocol implementation
+// High-level coordinator for ZeiCash Synchronization Protocol implementation
 //
 // This manager provides a clean interface between the blockchain core and
 // the ZSP-001 batch synchronization protocol. It handles peer management,
@@ -26,7 +26,7 @@ const BatchSyncContext = protocol.BatchSyncContext;
 const sequential = protocol.sequential;
 
 // Blockchain integration
-const ZeiCoin = @import("../node.zig").ZeiCoin;
+const ZeiCash = @import("../node.zig").ZeiCash;
 
 // Type aliases for clarity
 const Block = types.Block;
@@ -35,7 +35,7 @@ const Peer = net.Peer;
 const Allocator = std.mem.Allocator;
 
 // Module-level blockchain reference for dependency injection functions
-pub var g_blockchain: ?*ZeiCoin = null;
+pub var g_blockchain: ?*ZeiCash = null;
 const SyncState = protocol.SyncState;
 
 // ============================================================================
@@ -71,7 +71,7 @@ pub const SyncManager = struct {
     allocator: Allocator,
 
     /// Reference to the blockchain instance for integration
-    blockchain: *ZeiCoin,
+    blockchain: *ZeiCash,
 
     /// ZSP-001 batch synchronization protocol instance
     batch_sync: BatchSyncProtocol,
@@ -97,7 +97,7 @@ pub const SyncManager = struct {
     const Self = @This();
 
     /// Initialize the ZSP-001 sync manager
-    pub fn init(allocator: Allocator, blockchain: *ZeiCoin) !Self {
+    pub fn init(allocator: Allocator, blockchain: *ZeiCash) !Self {
         log.info("Initializing ZSP-001 synchronization manager", .{});
 
         // Set global blockchain reference for dependency injection functions
@@ -1128,7 +1128,7 @@ pub const SyncManager = struct {
     }
 
     /// Validate a batch of blocks for chain continuity (prevents fork issue)
-    fn validateBulkBlocks(blocks: []const Block, start_height: u32, blockchain: *ZeiCoin) !bool {
+    fn validateBulkBlocks(blocks: []const Block, start_height: u32, blockchain: *ZeiCash) !bool {
         log.info("🔍 [BULK VALIDATION] Validating {} blocks starting at height {}", .{ blocks.len, start_height });
 
         if (blocks.len == 0) {
@@ -1197,7 +1197,7 @@ pub const SyncManager = struct {
     }
 
     /// Verify block hash consensus with connected peers (optional additional security)
-    pub fn verifyBlockConsensus(blockchain: *ZeiCoin, block: Block, height: u32) !bool {
+    pub fn verifyBlockConsensus(blockchain: *ZeiCash, block: Block, height: u32) !bool {
         const mode = types.CONSENSUS.mode;
         
         // Skip if consensus is disabled
@@ -1339,7 +1339,7 @@ pub const SyncManager = struct {
         log.info("🧪 [SYNC MANAGER] Running sync manager test suite", .{});
 
         // Test basic initialization
-        var mock_blockchain: ZeiCoin = undefined; // Would be properly initialized in real tests
+        var mock_blockchain: ZeiCash = undefined; // Would be properly initialized in real tests
         var manager = try SyncManager.init(allocator, &mock_blockchain);
         defer manager.deinit();
 
@@ -1361,7 +1361,7 @@ pub const SyncManager = struct {
 // ============================================================================
 
 /// Create a properly configured sync manager instance
-pub fn createSyncManager(allocator: Allocator, blockchain: *ZeiCoin) !SyncManager {
+pub fn createSyncManager(allocator: Allocator, blockchain: *ZeiCash) !SyncManager {
     return SyncManager.init(allocator, blockchain);
 }
 

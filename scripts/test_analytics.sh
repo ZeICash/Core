@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ZeiCoin Analytics Test Script
+# ZeiCash Analytics Test Script
 # Tests the indexer and REST API components
 
 set -e
@@ -12,7 +12,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🧪 ZeiCoin Analytics Test Suite${NC}"
+echo -e "${BLUE}🧪 ZeiCash Analytics Test Suite${NC}"
 echo "================================"
 
 # Configuration
@@ -118,8 +118,8 @@ echo ""
 echo -e "${BLUE}2. Component Tests${NC}"
 echo "------------------"
 
-# Check if ZeiCoin server is running
-echo -n "Checking ZeiCoin server... "
+# Check if ZeiCash server is running
+echo -n "Checking ZeiCash server... "
 if check_process "zen_server"; then
     echo -e "${GREEN}✓ (running)${NC}"
 else
@@ -212,7 +212,7 @@ if test_db_connection 2>/dev/null && test_timescaledb 2>/dev/null && test_schema
     echo -e "${GREEN}✅ Analytics infrastructure is ready!${NC}"
     echo ""
     echo "Next steps:"
-    echo "1. Start the ZeiCoin server if not running"
+    echo "1. Start the ZeiCash server if not running"
     echo "2. Run the indexer to sync blockchain data"  
     echo "3. Start the REST API to serve analytics"
 else

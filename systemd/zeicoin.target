@@ -1,5 +1,5 @@
 [Unit]
-Description=ZeiCoin Blockchain Services
+Description=ZeiCash Blockchain Services
 Wants=zeicoin-mining.service zeicoin-transaction-api.service zeicoin-cli-bridge.service zeicoin-indexer.timer
 After=network.target postgresql.service
 

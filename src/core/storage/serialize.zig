@@ -1,5 +1,5 @@
 // serialize.zig - Zeicoin Minimal Serializer
-// Clean, simple, Zig-native serialization for ZeiCoin data structures
+// Clean, simple, Zig-native serialization for ZeiCash data structures
 
 const std = @import("std");
 const builtin = @import("builtin");
@@ -480,7 +480,7 @@ test "serialize strings" {
     var buffer = std.ArrayList(u8).init(testing.allocator);
     defer buffer.deinit();
 
-    const test_string = "Hello ZeiCoin!";
+    const test_string = "Hello ZeiCash!";
     try serialize(buffer.writer(), test_string);
 
     // Deserialize

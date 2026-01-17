@@ -1,4 +1,4 @@
-// indexer.zig - PostgreSQL blockchain indexer for ZeiCoin
+// indexer.zig - PostgreSQL blockchain indexer for ZeiCash
 const std = @import("std");
 const pg = @import("pg");
 const zeicoin = @import("zeicoin");
@@ -205,7 +205,7 @@ pub fn main() !void {
         .mainnet => "zeicoin_data_mainnet",
     };
 
-    std.log.info("🚀 Starting ZeiCoin PostgreSQL Indexer", .{});
+    std.log.info("🚀 Starting ZeiCash PostgreSQL Indexer", .{});
     std.log.info("📁 Blockchain path: {s}", .{blockchain_path});
     std.log.info("🌐 Network: {s}", .{@tagName(types.CURRENT_NETWORK)});
 

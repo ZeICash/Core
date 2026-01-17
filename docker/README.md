@@ -1,6 +1,6 @@
-# ZeiCoin Docker Multi-Node Testing Environment
+# ZeiCash Docker Multi-Node Testing Environment
 
-This Docker setup provides a complete 3-node ZeiCoin cluster for testing multi-node synchronization, P2P networking, and blockchain consensus on Windows.
+This Docker setup provides a complete 3-node ZeiCash cluster for testing multi-node synchronization, P2P networking, and blockchain consensus on Windows.
 
 ## Architecture
 
@@ -25,7 +25,7 @@ zeicoin-network (Docker bridge - ISOLATED from live network)
     └── Data: Docker volume 'node2-data'
 ```
 
-**Important**: This Docker setup is completely isolated from the live ZeiCoin testnet. The nodes will NOT connect to the public bootstrap nodes (209.38.31.77, 134.199.170.129). This creates a private testing network for safe experimentation.
+**Important**: This Docker setup is completely isolated from the live ZeiCash testnet. The nodes will NOT connect to the public bootstrap nodes (209.38.31.77, 134.199.170.129). This creates a private testing network for safe experimentation.
 
 ## Prerequisites
 
@@ -52,7 +52,7 @@ From the project root directory:
 docker-compose up -d
 
 # This will:
-# - Build the ZeiCoin Docker image (~5-10 minutes first time)
+# - Build the ZeiCash Docker image (~5-10 minutes first time)
 # - Start seed node and create miner wallet
 # - Start peer nodes and connect to seed
 # - Begin mining on seed node
@@ -483,7 +483,7 @@ docker-compose up -d --build
 # Remove all unused Docker resources
 docker system prune -a --volumes
 
-# Warning: This removes ALL unused Docker data, not just ZeiCoin
+# Warning: This removes ALL unused Docker data, not just ZeiCash
 ```
 
 ## Performance Optimization
@@ -553,4 +553,4 @@ For issues specific to Docker setup:
 3. Review troubleshooting section above
 4. Open issue at: https://github.com/ryo-zen/zeicoin/issues
 
-For general ZeiCoin questions, see [main README](../README.md).
+For general ZeiCash questions, see [main README](../README.md).

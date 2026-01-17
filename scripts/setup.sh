@@ -1,14 +1,14 @@
 #!/bin/bash
-# setup.sh - One-time setup script for ZeiCoin
+# setup.sh - One-time setup script for ZeiCash
 
 set -e
 
-echo "🚀 ZeiCoin Setup Script"
+echo "🚀 ZeiCash Setup Script"
 echo "======================"
 
 # Check if we're in the right directory
 if [ ! -f "src/apps/main.zig" ] || [ ! -f "build.zig" ]; then
-    echo "❌ Please run this script from the ZeiCoin root directory"
+    echo "❌ Please run this script from the ZeiCash root directory"
     echo "   (Should contain src/apps/main.zig and build.zig)"
     exit 1
 fi
@@ -151,8 +151,8 @@ else
     echo "✅ RandomX already built!"
 fi
 
-# Build ZeiCoin (Release mode for RandomX mining)
-echo "🔨 Building ZeiCoin (Release mode)..."
+# Build ZeiCash (Release mode for RandomX mining)
+echo "🔨 Building ZeiCash (Release mode)..."
 zig build -Doptimize=ReleaseFast
 
 # Create or use existing mining wallet
@@ -227,14 +227,14 @@ if [ -f ".env" ] && [ -n "$MINER_NAME" ]; then
     echo "✅ Test mode configured for systemd service"
 fi
 
-# Configure firewall for ZeiCoin ports
+# Configure firewall for ZeiCash ports
 echo "🔥 Configuring firewall..."
 if command -v ufw &> /dev/null; then
     # UFW (Ubuntu/Debian)
-    sudo ufw allow 10800/udp comment "ZeiCoin UDP Discovery"
-    sudo ufw allow 10801/tcp comment "ZeiCoin P2P"
-    sudo ufw allow 10802/tcp comment "ZeiCoin Client API"
-    sudo ufw allow 10803/tcp comment "ZeiCoin Metrics"
+    sudo ufw allow 10800/udp comment "ZeiCash UDP Discovery"
+    sudo ufw allow 10801/tcp comment "ZeiCash P2P"
+    sudo ufw allow 10802/tcp comment "ZeiCash Client API"
+    sudo ufw allow 10803/tcp comment "ZeiCash Metrics"
     echo "✅ UFW firewall configured"
 elif command -v firewall-cmd &> /dev/null; then
     # firewalld (CentOS/RHEL)
@@ -277,7 +277,7 @@ if command -v systemctl &> /dev/null; then
     
     sudo tee /etc/systemd/system/zeicoin-mining.service > /dev/null <<EOF
 [Unit]
-Description=ZeiCoin Mining Server ($MINER_NAME)
+Description=ZeiCash Mining Server ($MINER_NAME)
 After=network.target
 Wants=network.target
 

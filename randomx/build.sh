@@ -121,7 +121,7 @@ main() {
     
     log_info "RandomX build completed successfully!"
     log_info "Library installed to: $INSTALL_PREFIX"
-    log_info "You can now build the ZeiCoin RandomX demo"
+    log_info "You can now build the ZeiCash RandomX demo"
 }
 
 # Run main function

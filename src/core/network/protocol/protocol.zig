@@ -1,4 +1,4 @@
-// protocol.zig - Core protocol constants and types for ZeiCoin
+// protocol.zig - Core protocol constants and types for ZeiCash
 
 const std = @import("std");
 

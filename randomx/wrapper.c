@@ -105,7 +105,7 @@ randomx_context* randomx_init_fast(const char* key, size_t key_size) {
 
 // Test function
 int test_randomx_wrapper() {
-    const char* key = "ZeiCoin Test Key";
+    const char* key = "ZeiCash Test Key";
     const char* input = "Hello RandomX";
     unsigned char output[32];
     

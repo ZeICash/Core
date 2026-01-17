@@ -49,7 +49,7 @@ RUN gcc -o randomx/randomx_helper randomx/randomx_helper.c randomx/wrapper.c \
     -Irandomx -I/usr/local/include \
     -L/usr/local/lib -lrandomx -lstdc++ -lm
 
-# Build ZeiCoin
+# Build ZeiCash
 RUN zig build
 
 # Create data directory and config

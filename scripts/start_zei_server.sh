@@ -1,8 +1,8 @@
 #!/bin/bash
-# start_zei_server.sh - Start ZeiCoin server for public deployment
+# start_zei_server.sh - Start ZeiCash server for public deployment
 # Supports both local development and public server deployment
 
-echo "🚀 ZeiCoin Server Startup"
+echo "🚀 ZeiCash Server Startup"
 echo "========================="
 echo ""
 echo "💡 To start mining to a specific wallet, use:"
@@ -43,22 +43,22 @@ else
     fi
 fi
 
-echo "🔌 ZeiCoin ports: 10800 (UDP discovery), 10801 (P2P), 10802 (Client API)"
+echo "🔌 ZeiCash ports: 10800 (UDP discovery), 10801 (P2P), 10802 (Client API)"
 
 # Check if ports are available
 if netstat -an 2>/dev/null | grep -q ":10801 "; then
-    echo "⚠️  Port 10801 already in use. Stopping existing ZeiCoin processes..."
+    echo "⚠️  Port 10801 already in use. Stopping existing ZeiCash processes..."
     pkill -f zen_server 2>/dev/null || true
     sleep 2
 fi
 
 if netstat -an 2>/dev/null | grep -q ":10802 "; then
-    echo "⚠️  Port 10802 already in use. Stopping existing ZeiCoin processes..."
+    echo "⚠️  Port 10802 already in use. Stopping existing ZeiCash processes..."
     pkill -f zen_server 2>/dev/null || true
     sleep 2
 fi
 
-# Change to ZeiCoin directory and stay there
+# Change to ZeiCash directory and stay there
 cd "$(dirname "$0")/.."
 PROJECT_ROOT=$(pwd)
 
@@ -66,10 +66,10 @@ PROJECT_ROOT=$(pwd)
 # The server will use the appropriate one based on CURRENT_NETWORK in types.zig
 mkdir -p zeicoin_data_testnet/{blocks,accounts,wallets}
 mkdir -p zeicoin_data_mainnet/{blocks,accounts,wallets}
-echo "📁 Created ZeiCoin data directories (testnet and mainnet)"
+echo "📁 Created ZeiCash data directories (testnet and mainnet)"
 
 echo ""
-echo "🎯 Starting ZeiCoin Server..."
+echo "🎯 Starting ZeiCash Server..."
 echo "   - P2P Network: $BIND_IP:10801"
 echo "   - Client API: $BIND_IP:10802"
 echo "   - UDP Discovery: $BIND_IP:10800"
@@ -88,7 +88,7 @@ if [ "$BIND_IP" != "127.0.0.1" ] && [ "$BIND_IP" != "localhost" ]; then
 fi
 
 # Build and run server (Release mode for RandomX mining)
-echo "🔨 Building ZeiCoin server (Release mode)..."
+echo "🔨 Building ZeiCash server (Release mode)..."
 if ! zig build -Doptimize=ReleaseFast; then
     echo "❌ Build failed! Check your Zig installation and code."
     exit 1
@@ -108,7 +108,7 @@ if [ ! -f "./zig-out/bin/zen_server" ]; then
     exit 1
 fi
 
-echo "🌐 Starting ZeiCoin blockchain server..."
+echo "🌐 Starting ZeiCash blockchain server..."
 echo "   - Bind IP: $BIND_IP"
 echo "   - Build mode: Production (RandomX mining)"
 echo ""
