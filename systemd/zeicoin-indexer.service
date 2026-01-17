@@ -1,0 +1,21 @@
+[Unit]
+Description=ZeiCoin Blockchain Indexer
+After=postgresql.service zeicoin-server.service
+Requires=postgresql.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/zeicoin
+EnvironmentFile=-/root/zeicoin/.env
+EnvironmentFile=-/root/zeicoin/.env.local
+Environment="ZEICOIN_DB_HOST=127.0.0.1"
+Environment="ZEICOIN_DB_NAME=zeicoin_testnet"
+Environment="ZEICOIN_DB_USER=zeicoin"
+
+# Clean up stale indexer processes
+ExecStartPre=-/usr/bin/pkill -9 -x zeicoin_indexer
+
+ExecStart=/root/zeicoin/zig-out/bin/zeicoin_indexer
+StandardOutput=journal
+StandardError=journal
