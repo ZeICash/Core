@@ -69,36 +69,6 @@ ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zen_server --mine miner
 # Default bootstrap: 209.38.31.77:10801, 134.199.170.129:10801
 ```
 
-### CLI Usage
-
-```bash
-# Create a wallet (interactive password prompt)
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash wallet create alice
-
-# Check balance
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash balance alice
-
-# Get wallet address
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash address alice
-
-# Send transaction
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash send 100 <address> alice
-
-# View transaction history
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash history alice
-
-# Get blockchain status
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash status
-
-# Backup wallet (show 12-word mnemonic)
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash seed alice
-
-# Restore wallet from mnemonic
-ZEIcash_SERVER=127.0.0.1 ./zig-out/bin/zeicash wallet restore recovered word1 word2 ... word12
-```
-
-## Architecture
-
 ### Project Structure
 
 ```
@@ -117,13 +87,11 @@ zeicash/
 │   │   └── server/        # Server components
 │   ├── apps/              # Applications (use zeicash module)
 │   │   ├── main.zig            # Server entry point
-│   │   ├── cli.zig             # Command-line interface
 │   │   ├── indexer.zig         # PostgreSQL blockchain indexer
 │   │   └── transaction_api.zig # Transaction API service
 │   └── lib.zig            # Public API (zeicash module)
 ├── sql/                   # Database schemas
 ├── randomx/               # RandomX C library
-└── tests/                 # Test suite
 ```
 
 ### Core Components
@@ -297,11 +265,6 @@ zig build clean                    # Clean artifacts
 - Documentation improvements
 - Performance optimization
 - Website docs
-
-**Next Steps**:
-
-- Complete testnet validation
-- Community feedback
 
 ## Contributing
 
