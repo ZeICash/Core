@@ -132,7 +132,6 @@ Zeicash will feature an optional Layer 2 messaging layer that adds rich metadata
 ### Features (Planned)
 - **Transaction Enhancement**: Add messages, categories, and metadata to ZEI transactions
 - **Auto-Linking**: Indexer automatically links L2 messages to confirmed blockchain transactions
-- **Web Interface**: Full-featured web UI for sending enhanced transactions
 - **REST API**: Complete API for L2 message management and querying
 
 ### Requirements
